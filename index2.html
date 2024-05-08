@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Face Recognition</title>
+  <link rel="stylesheet" href="css.css"> <!-- CSS 파일 연결 -->
+  <style>
+
+
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: radial-gradient(circle at center, #ffffff 20%, #ffffff00 70%), radial-gradient(circle at center, #ffae00 20%, #ffffff00 70%);
+    }
+
+    #uploadButton {
+      cursor: pointer;
+      margin-top: 50px;
+    }
+
+    #uploadButton img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #logo {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20%;
+      height: auto;
+    }
+
+    #imageUpload {
+      display: none;
+    }
+
+    /* 이미지를 감싸는 컨테이너 스타일 */
+    #imageContainer {
+      width: 400px; /* 원하는 너비 지정 */
+      height: auto; /* 높이 자동 조정 */
+      margin-top: 20px; /* 이미지 컨테이너의 상단 여백 조정 */
+      position: relative; /* 상대적 위치 */
+    }
+
+    /* 이미지 컨테이너 내부 이미지 스타일 */
+    #imageContainer img {
+      width: 100%; /* 이미지 너비 100%로 지정 */
+      height: auto; /* 높이 자동 조정 */
+    }
+
+    /* 캔버스 스타일 */
+    canvas {
+      position: absolute; /* 절대적 위치 */
+      top: 0; /* 상단 정렬 */
+      left: 0; /* 왼쪽 정렬 */
+    }
+
+    body{
+        background-color: blanchedalmond;
+        height : 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bts1 {
+        font-size: 70px;
+        padding: 15px; /* 수정: px 단위 추가 */
+        background-color: blanchedalmond;
+        color: black;
+        border: 3px solid black;
+        text-transform: uppercase;
+        font-family: "Do Hyeon", sans-serif;
+        transition: all 0.4s;
+        position: fixed;
+        bottom: 50px; /* 수정: 하단 여백 조절 */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .bts1:focus{
+        outline: none;
+    }
+
+    .bts1:hover{
+        background-color: black;
+        color: white;
+    }
+
+    .bts1 {
+        position: fixed;
+        bottom: 50px; /* 원하는 위치로 조절 */
+        left: 10%;
+        transform: translateX(-50%);
+    }
+
+    .bts2 {
+        font-size: 70px;
+        padding: 15px; /* 수정: px 단위 추가 */
+        background-color: blanchedalmond;
+        color: black;
+        border: 3px solid black;
+        text-transform: uppercase;
+        font-family: "Do Hyeon", sans-serif;
+        transition: all 0.4s;
+        position: fixed;
+        bottom: 50px; /* 수정: 하단 여백 조절 */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .bts2:focus{
+        outline: none;
+    }
+
+    .bts2:hover{
+        background-color: black;
+        color: white;
+    }
+
+    .bts2 {
+        position: fixed;
+        bottom: 300 px; /* 원하는 위치로 조절 */
+        left: 90%;
+        transform: translateX(-50%);
+    }
+
+/* 이미지를 호버할 때 변경되는 스타일 */
+#uploadButton:hover img {
+  content: url('Design/upload2.png'); /* 호버할 때 다른 이미지로 변경 */
+}
+
+  </style>
+</head>
+<body>
+  <!-- 이미지 버튼을 포함한 레이블 -->
+  <label for="imageUpload" id="uploadButton">
+    <img src="Design/upload.png" alt="Upload">
+  </label>
+  <!-- 실제 파일 선택 input -->
+  <input type="file" id="imageUpload">
+
+  <!-- 로고 이미지 -->
+  <img src="Design/logo.png" alt="Logo" id="logo">
+
+  <!-- 이미지를 감싸는 컨테이너 -->
+  <div id="imageContainer">
+    <!-- 이미지를 동적으로 변경할 예정이므로 기본 이미지는 비워둡니다. -->
+  </div>
+
+  <!-- face-api.js 및 사용자 스크립트 로드 -->
+  <script defer src="face-api.min.js"></script>
+  <script defer src="script.js"></script>
+
+  <script>
+    // 이미지와 로고 숨기기 함수
+    function hideImages() {
+      document.getElementById('imageContainer').style.display = 'none';
+      document.getElementById('logo').style.display = 'none';
+    }
+
+    // 얼굴 트래킹 완료 시 숨기기 함수 호출
+    // 이는 예시로, 실제로는 face-api.js 등에서 얼굴 트래킹이 완료되었을 때 이 함수를 호출해야 합니다.
+    setTimeout(hideImages, 3000); // 3초 후에 호출 (3000ms = 3초)
+  </script>
+<button type="bts1" class="bts1 bts1-success me-1" onclick="location.href='index(yes).html'">맞다!</button>
+<button type="bts2" class="bts2 bts2-success me-1" onclick="location.href='index(No).html'">아니다..</button>
+</body>
+</html>

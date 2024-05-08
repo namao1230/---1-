@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 뷰포트 설정으로 모바일 및 태블릿에서도 최적의 레이아웃을 유지 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 이미지를 화면에 꽉 차게 표시하되, 비율이 깨져도 되도록 함 */
+        body, html {
+            margin: 0; /* 여백 제거 */
+            padding: 0; /* 내부 여백 제거 */
+            width: 100%; /* 너비를 화면 전체로 설정 */
+            height: 100%; /* 높이를 화면 전체로 설정 */
+            display: flex; /* Flexbox 레이아웃 사용으로 내부 요소를 유연하게 배치 */
+            justify-content: center; /* 가로 방향에서의 중앙 정렬 */
+            align-items: center; /* 세로 방향에서의 중앙 정렬 */
+            overflow: hidden; /* 화면을 넘어서는 이미지 부분을 숨김 */
+        }
+        img {
+            width: 100%; /* 이미지 너비를 화면 전체로 설정 */
+            height: 100%; /* 이미지 높이를 화면 전체로 설정 */
+            object-fit: fill; /* 이미지를 비율에 상관없이 꽉 채우도록 설정 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 이미지 소스 설정. alt 속성은 이미지 설명/대체 텍스트 제공 -->
+    <img src="https://raw.githubusercontent.com/namao1230/-/master/%EC%B0%BE%EC%95%98%EB%8B%A4.png" alt="">
+</body>
+</html>

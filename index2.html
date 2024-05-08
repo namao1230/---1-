@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Fonts 불러오기 -->
+  <!-- 이 구문은 Google Fonts에서 제공하는 "도현" 폰트를 웹 페이지에 연결하기 위한 것입니다. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+  
+  <!-- 페이지의 기본 설정 -->
+  <meta charset="UTF-8"> <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 반응형 웹 디자인을 위한 뷰포트 설정 -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> <!-- IE 브라우저 호환성 보장 -->
+  <title>Face Recognition</title> <!-- 웹 페이지의 제목 설정 -->
+  
+  <!-- 외부 CSS 파일 연결 -->
+  <!-- 이 구문은 동일한 폴더 내의 css.css 파일을 현재 HTML 문서에 연결하기 위한 것입니다. -->
+  <link rel="stylesheet" href="css.css"> 
+  
+  <!-- 인라인 스타일 -->
+  <style>
+    /* 전체 body에 대한 스타일 설정 */
+    /* 이 부분은 웹 페이지의 전체적인 레이아웃과 배경을 설정합니다. */
+    body {
+      margin: 0; /* 바깥 여백을 0으로 설정 */
+      padding: 0; /* 안쪽 여백을 0으로 설정 */
+      width: 100vw; /* 너비를 뷰포트 너비의 100%로 설정 */
+      height: 100vh; /* 높이를 뷰포트 높이의 100%로 설정 */
+      display: flex; /* Flexbox 레이아웃을 사용 */
+      justify-content: center; /* 주 축(여기서는 수평 축)을 중심으로 자식 요소들을 정렬 */
+      align-items: center; /* 교차 축(여기서는 수직 축)을 중심으로 자식 요소들을 정렬 */
+      flex-direction: column; /* 자식 요소들을 수직 방향으로 정렬 */
+      
+      /* 배경 그라디언트 적용 */
+      /* 이 부분은 body의 배경에 두 개의 원형 그라디언트를 중첩하여 적용하는 스타일입니다. */
+      background: radial-gradient(circle at center, #ffffff 20%, #ffffff00 70%), radial-gradient(circle at center, #ffae00 20%, #ffffff00 70%);
+    }
+
+ /* 이미지 업로드 버튼 스타일 설정 */
+#uploadButton {
+  cursor: pointer; /* 포인터 모양을 클릭 가능한 상태로 변경 */
+  margin-top: 50px; /* 버튼의 상단 여백을 50px로 설정 */
+}
+
+/* 이미지 업로드 버튼 내 이미지 스타일 설정 */
+#uploadButton img {
+  width: 100%; /* 이미지의 너비를 버튼 너비로 100% 설정 */
+  height: 100%; /* 이미지의 높이를 버튼 높이로 100% 설정 */
+}
+
+/* 로고 이미지 스타일 설정 */
+#logo {
+  position: absolute; /* 절대 위치를 사용하여 페이지 내에서 위치 지정 */
+  top: 10px; /* 상단에서 10px 떨어진 곳에 위치 */
+  left: 50%; /* 왼쪽에서부터 화면의 50% 지점에 위치 */
+  transform: translateX(-50%); /* X축으로 -50%만큼 이동하여 중앙 정렬 */
+  width: 20%; /* 로고 이미지 너비를 전체의 20%로 설정 */
+  height: auto; /* 높이를 자동으로 설정하여 비율 유지 */
+}
+
+/* 이미지 업로드 input 태그 숨김 */
+#imageUpload {
+  display: none; /* 업로드 버튼을 보이지 않게 설정 */
+}
+
+/* 이미지를 감싸는 컨테이너 스타일 설정 */
+#imageContainer {
+  width: 400px; /* 컨테이너의 너비를 400px로 설정 */
+  height: auto; /* 이미지의 원래 높이에 맞게 자동 조정 */
+  margin-top: 20px; /* 컨테이너 상단의 여백을 20px로 설정 */
+  position: relative; /* 위치를 상대적으로 설정, 내부 요소의 절대 위치 지정에 사용 */
+}
+
+/* 이미지 컨테이너 내 이미지 스타일 설정 */
+#imageContainer img {
+  width: 100%; /* 컨테이너 내의 이미지 너비를 컨테이너 너비로 100% 설정 */
+  height: auto; /* 이미지의 높이를 자동으로 설정하여 비율 유지 */
+}
+/* 캔버스 스타일 */
+canvas {
+  position: absolute; /* 캔버스를 페이지의 절대적 위치에 배치합니다. */
+  top: 0; /* 캔버스를 페이지의 상단에 정렬합니다. */
+  left: 0; /* 캔버스를 페이지의 왼쪽에 정렬합니다. */
+}
+
+body{
+    background-color: blanchedalmond; /* 배경색을 blanchedalmond로 설정합니다. */
+    height: 100vh; /* body의 높이를 뷰포트 높이의 100%로 설정하여 전체 화면을 채웁니다. */
+    display: flex; /* flexbox 레이아웃을 사용하여 자식 요소들을 정렬합니다. */
+    justify-content: center; /* 가로 축에서 중앙 정렬합니다. */
+    align-items: center; /* 세로 축에서 중앙 정렬합니다. */
+}
+
+.bts1 {
+    font-size: 70px; /* 폰트 크기를 70px로 설정합니다. */
+    padding: 15px; /* 주변 여백을 15px로 설정합니다. */
+    background-color: blanchedalmond; /* 배경색을 blanchedalmond로 설정합니다. */
+    color: black; /* 글자색을 검은색으로 설정합니다. */
+    border: 3px solid black; /* 테두리를 검은색 실선으로, 두께는 3px로 설정합니다. */
+    text-transform: uppercase; /* 텍스트를 대문자로 변환합니다. */
+    font-family: "Do Hyeon", sans-serif; /* 폰트 패밀리를 "Do Hyeon"과 sans-serif로 설정합니다. */
+    transition: all 0.4s; /* 모든 변화에 대해 0.4초 동안의 전환 효과를 적용합니다. */
+    position: fixed; /* 요소의 위치를 고정시킵니다. */
+    bottom: 50px; /* 하단에서 50px 떨어진 위치에 배치합니다. */
+    left: 50%; /* 왼쪽에서 50% 떨어진 위치에 배치합니다. */
+    transform: translateX(-50%); /* X축으로 -50% 만큼 이동시켜 가운데 정렬 효과를 줍니다. */
+}
+
+/* .bts1 클래스에 대한 기본 스타일 */
+.bts1 {
+    position: fixed; /* 고정 위치 */
+    bottom: 50px; /* 하단에서 50px */
+    left: 10%; /* 왼쪽에서 10% */
+    transform: translateX(-50%); /* X축 기준 중앙 정렬 */
+}
+
+/* .bts1 요소가 포커스될 때의 스타일 */
+.bts1:focus{
+    outline: none; /* 포커스 아웃라인 제거 */
+}
+
+/* .bts1 요소에 마우스 호버 시의 스타일 */
+.bts1:hover{
+    background-color: black; /* 배경색 검정 */
+    color: white; /* 글자색 흰색 */
+}
+
+/* .bts2 클래스에 대한 기본 스타일 */
+.bts2 {
+    font-size: 70px; /* 폰트 크기 */
+    padding: 15px; /* 패딩 */
+    background-color: blanchedalmond; /* 배경색 */
+    color: black; /* 글자색 */
+    border: 3px solid black; /* 테두리 */
+    text-transform: uppercase; /* 대문자 변환 */
+    font-family: "Do Hyeon", sans-serif; /* 폰트 스타일 */
+    transition: all 0.4s; /* 전환 효과 */
+    position: fixed; /* 고정 위치 */
+    bottom: 50px; /* 하단에서 50px */
+    left: 50%; /* 왼쪽에서 50% */
+    transform: translateX(-50%); /* X축 기준 중앙 정렬 */
+}
+
+/* .bts2 요소가 포커스될 때의 스타일 */
+.bts2:focus{
+    outline: none; /* 포커스 아웃라인 제거 */
+}
+
+/* .bts2 요소에 마우스 호버 시의 스타일 */
+.bts2:hover{
+    background-color: black; /* 배경색 검정 */
+    color: white; /* 글자색 흰색 */
+}
+
+/* .bts2 클래스의 위치 조정 */
+.bts2 {
+    position: fixed; /* 고정 위치 */
+    bottom: 50px; /* 하단에서 300px */
+    left: 90%; /* 왼쪽에서 90% */
+    transform: translateX(-50%); /* X축 기준 중앙 정렬 */
+}
+  #uploadButton:hover img {
+    content: url('Design/upload2.png'); /* 호버 시 이미지가 upload2.png로 변경됩니다 */
+  }
+</style>
+</head>
+<body>
+  <!-- 이미지 업로드 버튼: 이미지를 포함하는 레이블 정의 -->
+  <label for="imageUpload" id="uploadButton">
+    <img src="Design/upload.png" alt="Upload"> <!-- 업로드 버튼 이미지 -->
+  </label>
+  <!-- 파일 선택을 위한 input 요소 -->
+  <input type="file" id="imageUpload">
+
+  <!-- 로고 이미지 -->
+  <img src="Design/logo.png" alt="Logo" id="logo">
+
+  <!-- 업로드된 이미지를 표시할 컨테이너 -->
+  <div id="imageContainer">
+    <!-- 초기 상태에서는 내부가 비어 있음 -->
+  </div>
+
+  <!-- face-api.js와 사용자 정의 스크립트 로드 -->
+  <script defer src="face-api.min.js"></script>
+  <script defer src="script.js"></script>
+
+  <script>
+    // 이미지 및 로고 숨기기 함수
+    function hideImages() {
+      document.getElementById('imageContainer').style.display = 'none';
+      document.getElementById('logo').style.display = 'none';
+    }
+
+    // 얼굴 인식 처리 후 이미지와 로고 숨김
+    // setTimeout을 사용하여 예시로 3초 후 함수 호출
+    setTimeout(hideImages, 3000); // 3초 후에 hideImages 함수 호출
+  </script>
+  <!-- '맞다!' 버튼: 클릭 시 index(yes).html로 이동 -->
+  <button type="bts1" class="bts1 bts1-success me-1" onclick="location.href='index(yes).html'">맞다!</button>
+  <!-- '아니다..' 버튼: 클릭 시 index(No).html로 이동 -->
+  <button type="bts2" class="bts2 bts2-success me-1" onclick="location.href='index(No).html'">아니다..</button>
+</body>
+</html>

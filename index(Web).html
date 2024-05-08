@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Fonts를 사용하기 위한 사전 연결 설정 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts에서 Do Hyeon 폰트를 가져옴 -->
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+  <!-- 문자 인코딩을 UTF-8로 설정 -->
+  <meta charset="UTF-8">
+  <!-- 반응형 웹 디자인을 위한 뷰포트 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 최신 IE 호환성 보장 -->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 문서의 제목 -->
+  <title>Document</title>
+  <!-- 얼굴 인식 라이브러리 face-api.min.js를 비동기로 로드 -->
+  <script defer src="face-api.min.js"></script>
+  <!-- 사용자 정의 스크립트 script1.js를 비동기로 로드 -->
+  <script defer src="script1.js"></script>
+  
+  <style>
+    body {
+      /* 배경색 설정 */
+      background-color: blanchedalmond;
+      /* margin과 padding을 0으로 설정하여 기본 스타일 제거 */
+      margin: 0;
+      padding: 0;
+      /* 뷰포트 너비와 높이를 100%로 설정하여 전체 화면으로 표시 */
+      width: 100vw;
+      height: 100vh;
+      /* flexbox를 사용하여 내용을 수평 및 수직 중앙 정렬 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* 상대적 위치 설정 (내부 요소의 절대 위치를 위함) */
+      position: relative;
+    }
+
+    canvas {
+      /* canvas 요소를 절대 위치로 설정하여 body 내에서 자유롭게 배치 가능 */
+      position: absolute;
+    }
+    .overlay-text {
+      position: absolute; /* 위치를 절대값으로 설정 */
+      bottom: 300px; /* 아래쪽에서부터의 거리를 지정 */
+      left: 1100px; /* 왼쪽에서부터의 거리를 지정 */
+      font-size: 50px; /* 글자 크기를 지정 */
+      font-family: "Do Hyeon", sans-serif; /* 폰트 스타일을 지정 */
+      color: black; /* 글자 색상을 지정 */
+    }
+    .image-container {
+      position: absolute; /* 위치를 절대값으로 설정 */
+      top: 50%; /* 상단에서부터의 비율을 지정 */
+      left: 50%; /* 좌측에서부터의 비율을 지정 */
+      transform: translate(-50%, -50%); /* X축과 Y축으로 각각 50%만큼 이동하여 중앙 정렬 */
+    }
+    .image-container img {
+      position: absolute; /* 위치를 절대값으로 설정 */
+      width: 400px; /* 이미지의 너비를 지정 */
+      height: auto; /* 이미지의 높이를 자동으로 지정하여 원본 비율을 유지 */
+      /* 각 이미지의 위치 조정 */
+    }
+    /* 각 이미지에 대한 위치 설정 예시 */
+    .image1 {
+      top: -550px; /* 상단에서부터의 거리를 지정 */
+      left: 980px; /* 왼쪽에서부터의 거리를 지정 */
+    }
+    .image2 {
+      top: -580px; /* 상단에서부터의 거리를 지정 */
+      left: -1200px; /* 왼쪽에서부터의 거리를 지정(음수 값은 왼쪽으로 이동) */
+    }
+    .image3 {
+      top: 150px; /* 상단에서부터의 거리를 지정 */
+      left: 900px; /* 왼쪽에서부터의 거리를 지정 */
+    }
+    .image4 {
+      top: 150px; /* 상단에서부터의 거리를 지정 */
+      left: -1200px; /* 왼쪽에서부터의 거리를 지정(음수 값은 왼쪽으로 이동) */
+    }
+
+    .bts1 {
+        font-size: 70px; /* 폰트 크기 설정 */
+        padding: 15px; /* 내부 여백 설정, 수정: px 단위 추가 */
+        background-color: blanchedalmond; /* 배경 색상 설정 */
+        color: black; /* 글자 색상 설정 */
+        border: 3px solid black; /* 테두리 설정: 3px 굵기의 검은색 실선 */
+        text-transform: uppercase; /* 텍스트를 대문자로 변환 */
+        font-family: "Do Hyeon", sans-serif; /* 폰트 설정 */
+        transition: all 0.4s; /* 모든 변화에 대해 0.4초 동안의 전환 효과 적용 */
+        position: fixed; /* 요소의 위치를 고정 */
+        bottom: 50px; /* 하단에서 50px 떨어진 위치에 배치, 수정: 하단 여백 조절 */
+        left: 50%; /* 왼쪽에서 50% 떨어진 위치에 배치 */
+        transform: translateX(-50%); /* X축 기준으로 -50% 만큼 이동하여 가운데 정렬 */
+    }
+
+    .bts1:focus {
+        outline: none; /* 요소가 포커스 됐을 때 외곽선 제거 */
+    }
+
+    .bts1:hover {
+        background-color: black; /* 마우스 오버 시 배경 색상을 검은색으로 변경 */
+        color: white; /* 마우스 오버 시 글자 색상을 흰색으로 변경 */
+    }
+
+    .bts1 {
+        position: fixed;
+        bottom: 50px; /* 원하는 위치로 조절 */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 비디오 요소: 자동 재생되고 음소거된 상태로 비디오를 표시합니다. -->
+  <video id="video" width="720" height="560" autoplay muted></video>
+  <!-- 오버레이 텍스트: API 참조 및 얼굴 인식 테스트에 대한 메시지를 표시합니다. -->
+  <div class="overlay-text">이러한 API를 참조하여 만들었습니다. 얼굴 인식은 테스트 중...</div>
+  <!-- 이미지 컨테이너: 쿠키 이미지들을 포함하고 있습니다. -->
+  <div class="image-container">
+      <!-- 신현진 쿠키 이미지 -->
+      <img src="https://raw.githubusercontent.com/namao1230/-/master/%EC%8B%A0%ED%98%84%EC%A7%84%20%EC%BF%A0%ED%82%A4.png" alt="" class="image1">
+      <!-- 김종준 쿠키 이미지 -->
+      <img src="https://raw.githubusercontent.com/namao1230/-/master/%EA%B9%80%EC%A2%85%EC%A4%80%20%EC%BF%A0%ED%82%A4.png" alt="" class="image2">
+      <!-- 안현수 쿠키 이미지 -->
+      <img src="https://raw.githubusercontent.com/namao1230/-/master/%EC%95%88%ED%98%84%EC%88%98%20%EC%BF%A0%ED%82%A4.png" alt="" class="image3">
+      <!-- 홍재영 쿠키 이미지 -->
+      <img src="https://raw.githubusercontent.com/namao1230/-/master/%ED%99%8D%EC%9E%AC%EC%98%81%20%EC%BF%A0%ED%82%A4.png" alt="" class="image4">
+  </div>
+  <!-- 뒤로가기 버튼: 클릭 시 index.html 페이지로 이동합니다. -->
+  <button type="bts1" class="bts1 bts1-success me-1" onclick="location.href='index.html'">뒤로가기</button>
+  </body>
+  </html>

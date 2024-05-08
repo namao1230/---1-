@@ -688,6 +688,7 @@ script1.js : index2.html의 세부설정을 작성해놓은 js 파일입니다.
 
 -----------------------
 // index(No).html
+
         <!DOCTYPE html>
         <html lang="en">
         <head>

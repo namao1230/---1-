@@ -683,6 +683,7 @@ script1.js : index2.html의 세부설정을 작성해놓은 js 파일입니다.
           <button type="bts1" class="bts1 bts1-success me-1" onclick="location.href='index.html'">뒤로가기</button>
           </body>
           </html>
+
         
 
 -----------------------

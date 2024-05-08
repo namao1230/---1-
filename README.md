@@ -664,19 +664,19 @@ script1.js : index2.html의 세부설정을 작성해놓은 js 파일입니다.
           </style>
         </head>
         <body>
-          <!-- 비디오 요소: 자동 재생되고 음소거된 상태로 비디오를 표시합니다. -->
+          <!-- 비디오 요소: 자동 재생되고 음소거된 상태로 비디오를 표시합니다. ->
           <video id="video" width="720" height="560" autoplay muted></video>
-          <!-- 오버레이 텍스트: API 참조 및 얼굴 인식 테스트에 대한 메시지를 표시합니다. -->
+          <!-- 오버레이 텍스트: API 참조 및 얼굴 인식 테스트에 대한 메시지를 표시합니다. ->
           <div class="overlay-text">이러한 API를 참조하여 만들었습니다. 얼굴 인식은 테스트 중...</div>
           <!-- 이미지 컨테이너: 쿠키 이미지들을 포함하고 있습니다. -->
           <div class="image-container">
-              <!-- 신현진 쿠키 이미지 -->
+              <!-- 신현진 쿠키 이미지 ->
               <img src="https://raw.githubusercontent.com/namao1230/-/master/%EC%8B%A0%ED%98%84%EC%A7%84%20%EC%BF%A0%ED%82%A4.png" alt="" class="image1">
-              <!-- 김종준 쿠키 이미지 -->
+              <!-- 김종준 쿠키 이미지 ->
               <img src="https://raw.githubusercontent.com/namao1230/-/master/%EA%B9%80%EC%A2%85%EC%A4%80%20%EC%BF%A0%ED%82%A4.png" alt="" class="image2">
-              <!-- 안현수 쿠키 이미지 -->
+              <!-- 안현수 쿠키 이미지 ->
               <img src="https://raw.githubusercontent.com/namao1230/-/master/%EC%95%88%ED%98%84%EC%88%98%20%EC%BF%A0%ED%82%A4.png" alt="" class="image3">
-              <!-- 홍재영 쿠키 이미지 -->
+              <!-- 홍재영 쿠키 이미지 ->
               <img src="https://raw.githubusercontent.com/namao1230/-/master/%ED%99%8D%EC%9E%AC%EC%98%81%20%EC%BF%A0%ED%82%A4.png" alt="" class="image4">
           </div>
           <!-- 뒤로가기 버튼: 클릭 시 index.html 페이지로 이동합니다. -->

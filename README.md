@@ -131,3 +131,6 @@ script.js : index.html의 세부설정을 작성해놓은 js 파일입니다.
 
 script1.js : index2.html의 세부설정을 작성해놓은 js 파일입니다.
 
+-----------------------
+
+

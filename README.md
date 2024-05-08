@@ -127,5 +127,7 @@ index(No).html : index2.html에서 아니요를 누르면 나오는 html로 동�
 
 index(Yes).html : index2.html에서 맞아!를 누르면 나오는 html로 사진이 나오면서 끝입니다.
 
--------------------------------------
+script.js : index.html의 세부설정을 작성해놓은 js 파일입니다.
+
+script1.js : index2.html의 세부설정을 작성해놓은 js 파일입니다.
 

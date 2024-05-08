@@ -76,3 +76,56 @@ Face-API를 활용하여 얼굴을 인식하는 시스템을 제작하는 과정
 
 더 많은 발전 가능성을 가지고 있다고 생각합니다.
 
+
+
+-------------------
+
+# 파일마다 설명
+
+
+
+# Design : 
+
+버튼의 이미지를 저장한 폴더입니다.
+
+# img : 
+
+슬라이더의 화살표 등의 이미지를 저장한 폴더입니다.
+
+
+# labeled_images : 
+
+업로드한 사진에서 누구인지 찾기위해 저장해둔 사람들의 사진
+
+
+# models : 
+
+face-api 를 사용하기위한 model을 저장한 폴더
+
+
+# test_images : 
+
+업로드할 test 이미지를 저장해둔 폴더
+
+
+# face-api.min.js, face-api.min1.js :
+
+face-api 를 사용하기위한 min.js 파일
+
+
+# index(No).html, index(Web).html, index(Yes).html, index.html, index2.html :
+
+각각의 파일들은 버튼을 눌렀을때 이동하는 html을 구현해 놓은 것이고 각각 설명을 붙이자면
+
+index.html : 초기화면 조원들의 설명이 있습니다.
+
+index(Web).html: 웹테스트를 누르면 들어가지는 html 이고 웹캠을 통하여 얼굴이 트래킹 됩니다.
+
+index2.html : 초기화면에서 누구인지 찾으러가는 버튼을 누르면 나오는 html로 안에 이미지를 삽입하면 각 얼굴이 누구인지 트래킹 되어서 나오게 됩니다. 
+
+index(No).html : index2.html에서 아니요를 누르면 나오는 html로 동영상이 실행됩니다.
+
+index(Yes).html : index2.html에서 맞아!를 누르면 나오는 html로 사진이 나오면서 끝입니다.
+
+-------------------------------------
+
